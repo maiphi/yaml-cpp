@@ -1,3 +1,0 @@
-
-option('arch', type: 'string', value: '',
-       description: 'Set compiler option -march=<value>.')

@@ -36,8 +36,19 @@ yaml = library(
   'yaml-cpp',
   src,
   include_directories : include_dir,
-  install : false)
+  install : true)
+
+pkg = import('pkgconfig')
+pkg.generate(
+  yaml,
+  filebase : 'yaml-cpp',
+  name : 'Yaml-cpp',
+  description : 'A YAML parser and emitter for C++')
 
 yaml_dep = declare_dependency(
   include_directories : include_dir,
   link_with : yaml)
+
+if meson.version().version_compare('>=0.54.0')
+  meson.override_dependency('yaml-cpp', yaml_dep)
+endif
